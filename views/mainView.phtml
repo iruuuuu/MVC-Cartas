@@ -1,0 +1,100 @@
+<?php
+// Recuperamos el objeto User de la sesión para un acceso más fácil.
+$user = $_SESSION['user'];
+
+// Recuperamos la información de la última jugada, si existe.
+$ultimaJugada = $_SESSION['ultima_jugada'] ?? null;
+
+// Limpiamos la última jugada de la sesión para que no se muestre en recargas posteriores.
+unset($_SESSION['ultima_jugada']);
+
+// Pequeña función para encontrar la ruta correcta de la imagen de la carta.
+// Buscará .png, .jpeg y .jpg para que no tengas que preocuparte por la extensión.
+function getCardImagePath($cardIdentifier) {
+    $basePath = 'public/img/cartas/';
+    $cardName = htmlspecialchars($cardIdentifier);
+
+    if (file_exists($basePath . $cardName . '.jpeg')) {
+        return $basePath . $cardName . '.jpeg';
+    }
+    if (file_exists($basePath . $cardName . '.jpg')) {
+        return $basePath . $cardName . '.jpg';
+    }
+    // Por defecto, usa .png
+    return $basePath . $cardName . '.png';
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Cartas</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+
+<body>
+    <div class="container game-container">
+        <header class="game-header">
+            <div class="user-info">
+                <img src="public/img/<?php echo htmlspecialchars($user->getAvatar() ?: 'default.png'); ?>" alt="Avatar" class="avatar">
+                <span>Hola, <?php echo htmlspecialchars($user->getNombreUsuario()); ?></span>
+            </div>
+            <nav>
+                <a href="index.php?c=partidas&action=newgame">Nueva Partida</a>
+                <a href="index.php?c=usuarios&edit=1">Editar Perfil</a>
+                <a href="index.php?c=usuarios&logout=1">Cerrar Sesión</a>
+            </nav>
+        </header>
+
+        <?php if ($ultimaJugada): ?>
+            <div class="last-play">
+                <h3>Última Jugada:</h3>
+                <div class="play-details">
+                    <div>
+                        <p>Tu carta:</p>
+                        <img src="<?php echo getCardImagePath($ultimaJugada['carta_usuario']); ?>" alt="<?php echo htmlspecialchars($ultimaJugada['carta_usuario']); ?>" class="card">
+                    </div>
+                    <div class="result <?php echo strtolower(htmlspecialchars($ultimaJugada['resultado'])); ?>">
+                        <?php echo htmlspecialchars($ultimaJugada['resultado']); ?>
+                    </div>
+                    <div>
+                        <p>Carta de la máquina:</p>
+                        <img src="<?php echo getCardImagePath($ultimaJugada['carta_maquina']); ?>" alt="<?php echo htmlspecialchars($ultimaJugada['carta_maquina']); ?>" class="card">
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <main class="game-board">
+            <section class="player-hand">
+                <h2>Tus Cartas</h2>
+                <div class="cards">
+                    <?php foreach ($_SESSION['cartas_usuario'] as $carta): ?>
+                        <a href="index.php?c=partidas&carta=<?php echo urlencode($carta); ?>">
+                            <img src="<?php echo getCardImagePath($carta); ?>" alt="Carta <?php echo htmlspecialchars($carta); ?>" class="card">
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+
+            <section class="opponent-hand">
+                <h2>Cartas de la Máquina</h2>
+                <div class="cards">
+                    <?php foreach ($_SESSION['cartas_maquina'] as $carta): ?>
+                        <?php
+                        // Si se acaba de hacer una jugada, mostramos las cartas de la máquina.
+                        // Si no, las mostramos boca abajo.
+                        $imageToShow = $ultimaJugada ? $carta : 'reverso';
+                        $altText = $ultimaJugada ? "Carta " . htmlspecialchars($carta) : "Carta boca abajo";
+                        ?>
+                        <img src="<?php echo getCardImagePath($imageToShow); ?>" alt="<?php echo $altText; ?>" class="card">
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

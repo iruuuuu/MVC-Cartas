@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap');
+
+/* --- Estilos Generales de Casino --- */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #0a3d1b; /* Verde de mesa de póker */
+    background-image: radial-gradient(circle, #0f5228 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #f0e6d2; /* Un blanco hueso cálido */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #daa520; /* Dorado */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    color: #ffd700; /* Dorado más brillante */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #daa520;
+    padding-bottom: 10px;
+}
+
+a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+
+/* --- Formularios con Estilo de Lujo --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    background-color: #1a1a1a;
+    color: #f0e6d2;
+    padding: 12px 15px;
+    border: 1px solid #daa520;
+    border-radius: 6px;
+    font-size: 1em;
+    outline: none;
+}
+
+form input[type="file"] {
+    color: #f0e6d2;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+form input[type="submit"] {
+    background-color: #8B0000; /* Rojo oscuro */
+    color: #fff;
+    border: 2px solid #c0392b;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #a93226;
+    transform: scale(1.02);
+}
+
+/* --- Estilos de la Mesa de Juego --- */
+.game-container {
+    max-width: 800px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #daa520;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.game-header nav {
+    display: flex;
+    gap: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #daa520;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.avatar.large {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+.last-play {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid #2c5c3c;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.play-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.result {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.5);
+    text-shadow: 1px 1px 2px #000;
+}
+
+.result.ganada { background-color: #28a745; } /* Verde victoria */
+.result.perdida { background-color: #dc3545; } /* Rojo derrota */
+.result.empate { background-color: #6c757d; } /* Gris neutro */
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+.player-hand .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.6);
+    filter: brightness(1.1);
+}
