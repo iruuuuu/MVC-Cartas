@@ -49,6 +49,4 @@ El **Proyecto de Gestión de Cartas** facilita la organización de cartas de jue
 Gracias a su estructura ordenada y el uso de tecnologías como PHP, MySQL, HTML/CSS y JavaScript, resulta fácil de mantener y escalar.  
 Esperamos que sea una herramienta útil para jugadores y coleccionistas, permitiéndoles administrar sus cartas de forma eficiente.
 
-```markdown
 
-Si deseas, puedo añadir ejemplos de uso, capturas, instrucciones de instalación o un apartado de contribución.
